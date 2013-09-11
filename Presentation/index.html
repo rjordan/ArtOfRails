@@ -1,86 +1,229 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<title>The Art of Rails: Chapter 1</title>
-		<meta name="description" content="The Art of Rails">
-		<meta name="author" content="Richard Kent Jordan">
-		<meta name="apple-mobile-web-app-capable" content="yes" />
-		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-		<link rel="stylesheet" href="css/reveal.min.css">
-		<link rel="stylesheet" href="css/theme/default.css" id="theme">
-		<!-- For syntax highlighting -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
-		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
-		<script>
-			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
-		</script>
-		<!--[if lt IE 9]>
-		<script src="lib/js/html5shiv.js"></script>
-		<![endif]-->
-	</head>
-	<body>
+<head>
+  <meta charset="utf-8">
+  <title>The Art of Rails: Chapter 1</title>
+  <meta name="description" content="The Art of Rails">
+  <meta name="author" content="Richard Kent Jordan">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="css/reveal.min.css">
+  <link rel="stylesheet" href="css/theme/default.css" id="theme">
+  <!-- For syntax highlighting -->
+  <link rel="stylesheet" href="lib/css/tomorrow-night-bright.css">
+  <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+  <script>
+    document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+  </script>
+  <!--[if lt IE 9]>
+  <script src="lib/js/html5shiv.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
 
-		<div class="reveal">
+      <section>
+       <h2>The Art of Rails</h2>
+       <h3>Chapter 1: Humble Beginnings</h3>
+     </section>
 
-			<div class="slides">
+     <section>
+       <h2>Who Built Ruby</h2>
+       <p>Ruby's creator, Yukihiro "Matz" Matsumoto, blended parts of his favorite languages (Perl, Smalltalk, Eiffel, Ada, and Lisp) to form a new language that balanced functional programming with imperative programming.<p>
+     </section>
 
-				<section>
-					<h2>The Art of Rails</h2>
-					<h3>Chapter 1: Humble Beginnings</h3>
-				</section>
+     <section>
+       <h2>Why Ruby</h2>
+       <p>Ruby is designed with programmer happyness in mind. Matz has managed to blend elegance, simplicty, and power to create a fantastic language.<p>
+     </section>
 
-				<section>
-					<h2>Who Built Ruby</h2>
-					<p>Ruby's creator, Yukihiro "Matz" Matsumoto, blended parts of his favorite languages (Perl, Smalltalk, Eiffel, Ada, and Lisp) to form a new language that balanced functional programming with imperative programming.<p>
-				</section>
-
-        <section>
-					<h2>Why Ruby</h2>
-					<p>Ruby is designed with programmer happyness in mind. Matz has managed to blend elegance, simplicty, and power to create a fantastic language.<p>
-				</section>
-
-        <section>
-					<h2>Object Oriented</h2>
-					<p>EVERYTHING in Ruby is an object<p>
-          <pre><code data-trim>"string".length => 6</code></pre>
-          <pre class="fragment"><code data-trim>
-            1.class => Fixnum
+     <section>
+        <h2>Object Oriented</h2>
+        <p>EVERYTHING in Ruby is an object<p>
+        <pre><code data-trim>"string".length => 6</code></pre>
+        <pre class="fragment"><code data-trim>
+1.class => Fixnum
 3.14159.class => Float
+        </code></pre>
+        <pre class="fragment"><code data-trim>nil.class => NilClass</code></pre>
+      </section>
+
+      <section>
+        <h2>Arrays, Hashes, and Symbols</h2>
+        <p>
+          Arrays, Hashes, and Symbols are all first order objects in Ruby.
+          <pre class="fragment"><code data-trim>[1, "Two", 3.14].length => 3</code></pre>
+          <pre class="fragment"><code data-trim>
+{key1: 1, key2: "Two", key3: 3.14}.length => 3
+or
+{:key1=>1, :key2=>"Two", key3=>3.14}.length => 3
+</code></pre>
+          <pre class="fragment"><code data-trim>:symbol.object_id == :symbol.object_id</code></pre>
+        </p>
+      </section>
+
+      <section>
+        <h2>Iterators and Blocks</h2>
+        <p>
+          <pre class="fragment"><code data-trim>
+[1,2,3,4].each do |item|
+  puts item
+end
           </code></pre>
-          <pre class="fragment"><code data-trim>nil.class => NilClass</code></pre>
-				</section>
+          <pre class="fragment"><code data-trim>
+[4,2,1,3].sort { |item1, item2|  item2<=>item1 } => [4, 3, 2, 1]
+          </code></pre>
+          <pre class="fragment"><code data-trim>
+sqr = lambda { |n| n*n }   
+or
+sqr = ->(n){n*n}
 
-			</div>
+sqr.call(3) => 9
+          </code></pre>
+        </p>
+      </section>
 
-		</div>
+     <section>
+        <h2>Classes and Modules</h2>
+          <pre><code data-trim class="ruby">
+module MyNamespace
+  class Program
+    def run()
+      puts "Running!"
+    end
+  end
+end
+p = MyNamespace::Program.new
+p.run => "Running!"
+          </code></pre>
+          <pre class="fragment">Open for Extension<code data-trim class="ruby">
+class String
+  def foo
+    "Foo#{self}"
+  end
+end
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.min.js"></script>
-		<script>
+"Bar".foo => "FooBar"
+          </code></pre>
+     </section>
 
-			// Full list of configuration options available here:
-			// https://github.com/hakimel/reveal.js#configuration
-			Reveal.initialize({
-				controls: true,
-				progress: true,
-				history: true,
-				center: true,
+     <section>
+        <h2>Classes and Modules: Part Deux Ducks</h2>
+          <pre><code data-trim class="ruby">
+class Dog
+  def speak
+    puts "Bark Bark"
+  end
+end
 
-				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
-				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+class Cat
+  def speak
+    puts "Meow"
+  end
+end
 
-				// Optional libraries used to extend on reveal.js
-				dependencies: [
-					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
-					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
-				]
-			});
-		</script>
-	</body>
+def SaySomething(animal)
+  puts animal.speak
+end
+
+SaySomething(Cat.new) => "Meow"
+          </code></pre>
+     </section>
+
+     <section>
+        <h2>Classes and Modules: Part Three Mixins</h2>
+          <pre><code data-trim class="ruby">
+module Runnable
+  def run
+    puts "Running!"
+  end
+end
+
+class Program
+  include Runnable
+end
+
+p = Program.new
+p.run => "Running!"
+          </code></pre>
+     </section>
+
+     <section>
+        <h2>Reflection and Metaprogramming</h2>
+          <pre><code data-trim class="ruby">
+String.methods(false) => [:try_convert]
+
+"string".methods(false) => []
+
+Object.respond_to?(:to_s) => true
+          </code></pre>
+          <pre class="fragment">Staticly Called<code data-trim class="ruby">
+"string".upcase => "STRING"
+          </code></pre>
+          <pre class="fragment">Dynamicly Dispatched<code data-trim class="ruby">
+"string".send(:upcase) => "STRING"
+          </code></pre>
+
+     </section>
+
+     <section>
+        <h2>JRuby and Java classes</h2>
+          <pre class="fragment">Include the magic<code data-trim class="ruby">
+require 'java'
+          </code></pre>
+          <pre class="fragment"><code data-trim class="ruby">
+import javax.swing.JFrame
+
+class Example < JFrame
+    def initialize
+        super "Simple"
+        self.initUI
+    end
+      
+    def initUI
+        self.setSize 300, 200
+        self.setDefaultCloseOperation JFrame::EXIT_ON_CLOSE
+        self.setLocationRelativeTo nil
+        self.setVisible true
+    end
+end
+
+Example.new          
+          </code></pre>
+     </section>
+
+     <section>
+        <h2>Questions</h2>
+     </section>
+
+        </div>
+      </div>
+      <script src="lib/js/head.min.js"></script>
+      <script src="js/reveal.min.js"></script>
+      <script>
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+       { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+       { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+       { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+       { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+       { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+       { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+       ]
+     });
+</script>
+</body>
 </html>
